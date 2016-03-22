@@ -61,8 +61,16 @@ webpackJsonp([0],[
 	        return todo
 	      };
 	    })
-	    dataService.saveTodos(filteredTodos);
+	    dataService.saveTodos(filteredTodos).finally($scope.resetTodoState());
+	    
 	  };
+
+	  $scope.resetTodoState = function(){
+	    $scope.todos.forEach(function(todo){
+	      todo.edited = false;
+	    });
+	  };
+
 	});
 
 
@@ -91,7 +99,7 @@ webpackJsonp([0],[
 	var angular = __webpack_require__(1);
 
 	angular.module('todoListApp')
-	.service('dataService', function($http) {
+	.service('dataService', function($http, $q) {
 	  this.getTodos = function(cb) {
 	    $http.get('/api/todos').then(cb);
 	  };
@@ -101,7 +109,25 @@ webpackJsonp([0],[
 	  };
 
 	  this.saveTodos = function(todos) {
-	    console.log("I saved " + todos.length + " todos!");
+	    // create an array of requests we can now use the q service to run all of our requests in parallel
+	    var queue = [];
+	    todos.forEach(function(todo) {
+	        var request;
+	        if(!todo._id) {
+	          request = $http.post('/api/todos', todo);
+	      } else { // use the put route when existing todo is edited
+	        request = $http.put('/api/todos/' + todo._id, todo).then(function(result) {
+	            todo = result.data.todo;
+	            return todo;
+	          });
+	      }
+	      queue.push(request);
+	    });
+	    return $q.all(queue).then(function(results){ // iterates through the q runs each request and for all of them returns a promise - with results paramerter
+	      console.log("I saved " + todos.length + " todos!");
+
+	    });
+
 	  };
 
 	});
