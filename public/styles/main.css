@@ -3,7 +3,9 @@ body {
   font-family: "Varela Round";
   text-align: center;
   background: #edeff0;
-  font-size: 16px; }
+  font-size: 16px;
+  padding-top: 0;
+ }
 
 a {
   color: #3f8abf;
@@ -68,4 +70,25 @@ input[type="checkbox"] + span {
 }
 input[type="checkbox"]:checked + span {
     background:url(checkbox-filled.svg) left top no-repeat;
+}
+nav {
+  background-color: #adadad;
+  padding: 0;
+  height: 35px;
+}
+nav ul {
+  text-align: left;
+  list-style: none;
+  margin-left: 0;
+  padding: 0;
+}
+nav ul li {
+  display: inline-block;
+}
+nav ul li a {
+  display: block;
+  margin: 0;
+  padding: 10px 15px 15px 10px;
+  color: #444;
+
 }
