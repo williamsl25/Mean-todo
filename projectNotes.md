@@ -93,6 +93,7 @@ app.use('/api', router);
 2.  create new folder called api and move routes to the file
 3.  touch index.js inside api folder - this will act as our API module
 4.  add use strict and include our dependency express
+
 ```
 'use strict';
 // Express API
@@ -103,11 +104,13 @@ var express = require('express');
   * make sure to leave app.use('/api', router); in app.js bc it will be used to import our router
 
 6.  export the code as an imported module
+
 ```
 module.exports = router;
 ```
 
 7.  go back to app.js and say our router is the API module that we have required
+
 ```
 var router = require('./api');
 ```
@@ -181,7 +184,8 @@ module.exports = {
   * look in public/scripts folder and you will see webpack created todo.bundle.js and vendor.bundle.js
 
 2. in app.js
-* add require statements
+
+  * add require statements
 
 ```
 var angular = require('angular');
@@ -203,10 +207,12 @@ var angular = require('angular');
 
 below the 'use strict' statement : You need to add the following.
 
-```var angular = require('angular');
+```
+var angular = require('angular');
 ```
 
 ### Once those have been updated, your app.js file should look like this.
+
 ```
 'use strict';
 
@@ -261,6 +267,7 @@ iron-node src/app.js
 1. var Todos = require('../models/todo'); in index.js
 2. comment out mock data in index.js
 3. GET todos using the find method
+
 ```
 Todo.find({}, function(err, todos) {
   if(err){
@@ -274,12 +281,15 @@ Todo.find({}, function(err, todos) {
 1. load data - create src/seed.js
 2. require('./seed'); in app.js
 3. in seed.js
+
 ```
 var Todo = require('./models/todo');
 ```
 
 * create an array of data
-```var todos = [
+
+```
+var todos = [
   'go grocery shopping',
   'go to post office',
   'walk the dogs',
@@ -301,6 +311,7 @@ todos.forEach(function (todo, index) {
 ```
 
 * To create a new record in the database
+
 ```
 Todo.create({name: 'the todo'});
 ```
@@ -313,16 +324,19 @@ Todo.create({name: 'the todo'});
   * npm install body-parser --save
 
 2. require body parser in app.js
+
 ```
 var parser = require('body-parser');
 ```
 
 3. use parser.json in app.js
+
 ```
 app.use(parser.json());
 ```
 
 #### to create and store todo in db
+
 ```
 router.post('/todos', function(req, res){
   var todo = req.body; // body of the request will be the data for our todos
@@ -345,6 +359,7 @@ router.post('/todos', function(req, res){
 2. use q provider to bundle a request to the server
 3. in app/scripts/services/data.js
 - add q in
+
 ```
 .service('dataService', function($http, $q))
 ```
@@ -357,12 +372,14 @@ router.post('/todos', function(req, res){
 
 - takes 1 sec as the second parameter
 - takes # of intervals as third parameter
+
 ```
 $interval($scope.counter(), 1000, 10);
 ```
 
 * $log
 * create the counter function to log a String
+
 ```
 $scope.counter = function(){
   $scope.seconds++;
@@ -371,6 +388,7 @@ $scope.counter = function(){
 ```
 
 * initialize the counter
+
 ```
 $scope.seconds = 0;
 ```
