@@ -46,7 +46,7 @@ app.use('/', express.static('public'));
 ```
 
 14. express should be serving the angular-basics app from the public directory
-___________________________________________________________________________
+
 ### Set up an Express API
 1. src/app.js set up GET route
 
@@ -87,7 +87,7 @@ app.use('/api', router);
   * TODO: POST route to create entries
   * TODO: PUT route to update entries
   * TODO: DELETE route to delete entries
-_______________________________________________________________
+
 ### Create an API controller
 1. clean up app.js file and move API router to its own file
 2.  create new folder called api and move routes to the file
@@ -113,7 +113,7 @@ var router = require('./api');
 ```
 
 8.  we are mounting our router to the api url
-_____________________________________________________________
+
 ### Create mock data
 1. create mock folder
 2. create todos.json
@@ -130,7 +130,7 @@ res.json({todos: todos});
 5. use postman to check routes
 6. in postman GET  => http://localhost:3000/api/todos
 7. you should see the mock data
-_____________________________________________________________
+
 ### Connecting angular app to the express API
 
 * SEE NOTES FOR ANGULAR BASICS course
