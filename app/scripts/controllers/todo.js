@@ -1,14 +1,12 @@
 'use strict';
 
-var angular = require('angular');
+function TodoCtrl ($scope, dataService) {
 
-angular.module('todoListApp')
-  .controller('todoCtrl', function($scope, dataService) {
-    $scope.deleteTodo = function(todo, index) {
-      dataService.deleteTodo(todo).then(function() {
-       $scope.todos.splice(index, 1);
-     });
-    };
+  $scope.deleteTodo = function(todo, index) {
+    dataService.deleteTodo(todo).then(function() {
+      $scope.todos.splice(index, 1);
+    });
+  };
 
   $scope.saveTodos = function() {
     var filteredTodos = $scope.todos.filter(function(todo){
@@ -16,14 +14,15 @@ angular.module('todoListApp')
         return todo
       };
     })
-    dataService.saveTodos(filteredTodos).finally($scope.resetTodoState());
-
+    dataService.saveTodos(filteredTodos)
+      .finally($scope.resetTodoState());
   };
 
-  $scope.resetTodoState = function(){
-    $scope.todos.forEach(function(todo){
-      todo.edited = false;
-    });
-  };
+  $scope.resetTodoState = function() {
+      $scope.todos.forEach(function(todo) {
+         todo.edited = false;
+      });
+  }
+}
 
-});
+module.exports = TodoCtrl;
